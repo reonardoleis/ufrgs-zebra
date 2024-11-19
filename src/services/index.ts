@@ -3,7 +3,7 @@ import { solverFactory } from "./solver";
 import { ZebraPuzzle } from "./types";
 
 async function getPuzzleByEditCode(code: string) {
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await new Promise(resolve => setTimeout(() => resolve(code), 500));
     const puzzle: Puzzle = {
         id: 122918,
         body: '',

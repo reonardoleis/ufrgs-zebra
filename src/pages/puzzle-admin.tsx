@@ -11,19 +11,19 @@ function PuzzleAdmin() {
     useEffect(() => {
         switch (menuOption) {
             case 'edit': {
-                getPuzzleByEditCode(puzzleCode!!)
+                getPuzzleByEditCode(puzzleCode)
                 .then(puzzle => setPuzzle(puzzle))
                 .catch(() => alert('Houve um erro ao carregar seu puzzle.'));
                 break;
             }
 
             case 'create': {
-                setPuzzleCode(undefined);
+                setPuzzleCode('');
                 setPuzzle(undefined);
                 break;
             }
         }
-    }, []);
+    });
 
     return (
         <Container>

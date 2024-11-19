@@ -9,7 +9,6 @@ type InputProps = {
 }
 
 function Input({
-        onChange,
         placeholder = '',
         fontSize = 20,
         width = '100%', 

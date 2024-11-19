@@ -6,8 +6,8 @@ type MenuOption = 'play' | 'edit' | 'create' | null;
 type AppContextProps = {
   menuOption: MenuOption;
   setMenuOption: React.Dispatch<React.SetStateAction<MenuOption>>;
-  puzzleCode?: string;
-  setPuzzleCode: React.Dispatch<React.SetStateAction<string | undefined>>;
+  puzzleCode: string;
+  setPuzzleCode: React.Dispatch<React.SetStateAction<string>>;
   puzzle?: Puzzle;
   setPuzzle: React.Dispatch<React.SetStateAction<Puzzle | undefined>>;
 };
@@ -16,7 +16,7 @@ const AppContext = createContext<AppContextProps | undefined>(undefined);
 
 const AppProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [menuOption, setMenuOption] = useState<MenuOption>(null);
-  const [puzzleCode, setPuzzleCode] = useState<string | undefined>();
+  const [puzzleCode, setPuzzleCode] = useState<string>('');
   const [puzzle, setPuzzle] = useState<Puzzle | undefined>();
 
   return (
