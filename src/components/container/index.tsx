@@ -3,12 +3,14 @@ import { ReactNode } from "react";
 
 type ContainerProps = {
     children: ReactNode;
+    loading?: boolean;
 }
 
-function Container({ children }: ContainerProps) {
+function Container({ children, loading = false }: ContainerProps) {
     return (
+
         <div 
-            className="flex items-center flex-col justify-center w-[100vw] h-[100vh]" 
+            className="flex items-center flex-col justify-center w-[100vw] min-h-[100vh] h-[fit-content] bg-white" 
             style={
                 { 
                     backgroundColor: themes.colors.background.primary,
@@ -16,9 +18,10 @@ function Container({ children }: ContainerProps) {
                 }
             }>
            <div className="flex items-center flex-col justify-center md:w-[75vw] w-[90vw]">
-           { children }
+           { !loading ? children : <img src="/loading.webp"/> }
            </div>
         </div>
+
     )
 }
 

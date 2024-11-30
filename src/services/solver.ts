@@ -2,7 +2,7 @@ import { Combination, ZebraPuzzle } from "./types";
 
 type CombinationGenerator = (zebraPuzzle: ZebraPuzzle) => Combination[][];
 type ValidCombinationsFilter = (combinations: Combination[][], zebraPuzzle: ZebraPuzzle) => Combination[][];
-type SolverResult = {
+export type SolverResult = {
     validCombinations: Combination[][];
     isSolvable: boolean;
 }
@@ -85,7 +85,7 @@ const filterValidCombinations = (
             for (const column in entityKnownValues) {
                 if (entityKnownValues.hasOwnProperty(column)) {
                     const requiredValue = entityKnownValues[column];
-                    if (columns[column] !== requiredValue) {
+                    if (columns[column] !== requiredValue && requiredValue !== '') {
                         return false;
                     }
                 }

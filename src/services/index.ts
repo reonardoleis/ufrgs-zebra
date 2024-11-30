@@ -1,24 +1,41 @@
 import { Puzzle } from "@/entities";
-import { solverFactory } from "./solver";
-import { ZebraPuzzle } from "./types";
+import { solverFactory, SolverResult } from "./solver";
+import { Combination, ZebraPuzzle } from "./types";
 
-async function getPuzzleByEditCode(code: string) {
-    await new Promise(resolve => setTimeout(() => resolve(code), 500));
-    const puzzle: Puzzle = {
-        id: 122918,
-        body: '',
-        createdAt: '2024-11-17 00:00:00',
-        updatedAt: '2024-11-17 00:00:00',
-        editCode: 'sLO3mdlfk432Oflk4mAAlsk3j',
-        playCode: 'meNasdlerkRTMGnd341o2esK',
-    };
+async function getPuzzleByCode(code: string) {
+    try {
+        const result = await fetch(`/api/find?code=${code}`);
+        if (result.status === 404) {
+            alert('Puzzle não encontrado.');
+            return;
+        }
 
-    return {
-        ...puzzle,
-        toInstance: () => JSON.parse(puzzle.body) as ZebraPuzzle,
-    };
+        const json = await result.json();
+        return json.data as Puzzle;
+    } catch (e) {
+        alert('Erro ao buscar puzzle.');
+    }
 }
 
 const solver = solverFactory();
 
-export { getPuzzleByEditCode, solver };
+const zebraPuzzleFactory = (): ZebraPuzzle => ({
+    columns: [],
+    possibilities: [],
+    entities: [],
+    restrictions: {},
+    known: {},
+});
+
+const stringifyResult = (solution: SolverResult): string | null => {
+    if (solution.validCombinations.length > 0) {
+        const results = solution.validCombinations.map((combination: Combination[], index: number) => {
+            return `Possibilidade #${index}: ${combination.map(c => `${c.entity} usa ${Object.entries(c.columns).map(([key, value]) => `${key} ${value}`).join(', ')}`).join(', ')}`;
+        }).join('<br>');
+        return results;
+    }
+
+    return null;
+}
+
+export { getPuzzleByCode, solver, zebraPuzzleFactory, stringifyResult };

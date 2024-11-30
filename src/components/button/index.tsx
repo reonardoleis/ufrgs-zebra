@@ -28,7 +28,7 @@ function Button({
                 if (onClick) onClick();
                 if (href) router.push(href);
             }} 
-            className="rounded-md text-white hover:opacity-90 transition"
+            className="rounded-md text-white hover:opacity-90 transition p-2"
             style={{
                 backgroundColor: color,
                 width: width,

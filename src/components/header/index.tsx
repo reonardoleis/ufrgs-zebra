@@ -4,9 +4,10 @@ import { useEffect, useState } from "react";
 type HeaderProps = {
     title: string;
     description: string;
+    extra?: string;
 }
 
-function Header({ title, description = ''} : HeaderProps) {
+function Header({ title, description = '', extra} : HeaderProps) {
     const router = useRouter();
     const [ showHomeLink, setShowHomeLink ] = useState(false);
 
@@ -21,6 +22,7 @@ function Header({ title, description = ''} : HeaderProps) {
             { showHomeLink && <span style={{ cursor: 'pointer' }} onClick={backToHome}>← Início</span>}
             <h1 className="text-[30pt]">{title}</h1>
             <h2 className="text-[20pt] text-gray-600">{description}</h2>
+            { extra && <h2 className="text-[12pt] text-gray-600" dangerouslySetInnerHTML={{__html: extra}} />}
         </div>
     )
 }

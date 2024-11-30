@@ -1,10 +1,10 @@
 type Puzzle = {
     id: number;
-    body: string;
-    playCode: string;
-    editCode: string;
-    createdAt: string;
-    updatedAt: string;
+    play_code: string;
+    edit_code: string;
+    puzzle: string;
+    created_at: string;
+    updated_at: string;
 };
 
 export type { Puzzle };
